@@ -16,7 +16,7 @@ class User extends Migration
         Schema::create('tbl_user',function(Blueprint $table){
             $table->increments('id');
             $table->string('nama_user');
-            $table->float('email');
+            $table->string('email');
             $table->string('password');
         }); 
     }

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Login | E-Shopper</title>
+    <title>Cart | E-Shopper</title>
     <link href="/BahanStudy/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/BahanStudy/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/BahanStudy/ss/font-awesome.min.css" rel="stylesheet">
     <link href="/BahanStudy/css/prettyPhoto.css" rel="stylesheet">
     <link href="/BahanStudy/css/price-range.css" rel="stylesheet">
     <link href="/BahanStudy/css/animate.css" rel="stylesheet">
@@ -17,11 +17,11 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/BahanStudy/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/BahanStudy/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/BahanStudy/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/BahanStudy/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/BahanStudy/images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
 <body>
@@ -32,7 +32,7 @@
 				<div class="row">
 					<div class="col-md-4 clearfix">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<a href="index.html"><img src="/BahanStudy/images/home/logo.png" alt="" /></a>
 						</div>
 						
 					</div>
@@ -78,42 +78,78 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	<section id="form"><!--form-->
+
+	<section id="cart_items">
 		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $total= 0; ?>
+                        @foreach($keranjang as $krj)
+
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="/Bdata_file/{{$krj->gambar}}" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">{{$krj->nama_produk}}</a></h4>
+							</td>
+							<td class="cart_price">
+								<p>{{$krj->harga}}</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									{{$krj->jumlah}}
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">Rp. {{$krj->harga * $krj->jumlah}}</p>
+							</td>
+							
+						</tr>
+                        <?php $total+=($krj->jumlah * $krj->harga) ?>
+                        @endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			
 			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-form"><!--login form-->
-						<h2>Login to your account</h2>
-						<form action="/masuk" method="POST">
-							<input type="email" placeholder="Email Address" name = "email" />
-							<input type="password" placeholder="Nama" name = "password" />
-                            <span>
-								<input type="checkbox" class="checkbox"> 
-								Keep me signed in
-							</span>
-							<button type="submit" class="btn btn-default">Login</button>
-						</form>
-					</div><!--/login form-->
+				<div class="col-sm-6">
+				
 				</div>
-				<div class="col-sm-1">
-					<h2 class="or">OR</h2>
-				</div>
-				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
-						<h2>New User Signup!</h2>
-						<form action="/daftar" method="POST">
-							<input type="text" placeholder="Nama"  name = "nama"/>
-							<input type="email" placeholder="Email Address"  name = "email"/>
-							<input type="password" placeholder="Password" name="password"/>
-							<button type="submit" class="btn btn-default">Signup</button>
-						</form>
-					</div><!--/sign up form-->
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Total <span>Rp.{{$total}}</span></li>
+						</ul>
+							<a class="btn btn-default check_out" href="">Check Out</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</section><!--/form-->
-	
-	
+	</section><!--/#do_action-->
+
 	<footer id="footer"><!--Footer-->
 		
 		<div class="footer-bottom">
@@ -126,11 +162,12 @@
 		</div>
 		
 	</footer><!--/Footer-->
-  
+	
+
+
     <script src="/BahanStudy/js/jquery.js"></script>
-	<script src="/BahanStudy/js/price-range.js"></script>
-    <script src="/BahanStudy/js/jquery.scrollUp.min.js"></script>
 	<script src="/BahanStudy/js/bootstrap.min.js"></script>
+	<script src="/BahanStudy/js/jquery.scrollUp.min.js"></script>
     <script src="/BahanStudy/js/jquery.prettyPhoto.js"></script>
     <script src="/BahanStudy/js/main.js"></script>
 </body>
